@@ -62,20 +62,20 @@ export const questionOne = async (
 
     collector.on("collect", async (collected) => {
       if (collected.isSelectMenu()) {
+        await collected.deferReply({ ephemeral: true });
         if (collected.values[0] === "danny") {
-          await collected.reply({
-            content: "Correct! Please check the form for the next question.",
-            ephemeral: true,
+          await interaction.editReply({
+            content: "Correct! Here comes the next question.",
+            components: [],
           });
-          await questionTwo(interaction);
+          await questionTwo(collected);
         } else {
           await interaction.editReply({
             content: "You failed to select the correct answer.",
             components: [],
           });
-          await collected.reply({
+          await collected.editReply({
             content: "You will now be kicked.",
-            ephemeral: true,
           });
           setTimeout(async () => {
             await member.kick();

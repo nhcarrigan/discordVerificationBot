@@ -1,11 +1,11 @@
 import {
-  ButtonInteraction,
   CommandInteraction,
   Guild,
   GuildMember,
   Message,
   MessageActionRow,
   MessageSelectMenu,
+  SelectMenuInteraction,
 } from "discord.js";
 
 import { logHandler } from "../utils/logHandler";
@@ -19,7 +19,7 @@ import { verifyUser } from "./verifyUser";
  * @param {CommandInteraction} interaction The command interaction.
  */
 export const questionThree = async (
-  interaction: ButtonInteraction
+  interaction: SelectMenuInteraction
 ): Promise<void> => {
   try {
     if (!interaction.member) {
@@ -66,6 +66,7 @@ export const questionThree = async (
         if (collected.values[0] === "ver") {
           await collected.reply({
             content: "Correct! Please wait...",
+            components: [],
             ephemeral: true,
           });
           await interaction.editReply({
@@ -85,9 +86,8 @@ export const questionThree = async (
             content: "You failed to select the correct answer.",
             components: [],
           });
-          await collected.reply({
+          await collected.editReply({
             content: "You will now be kicked.",
-            ephemeral: true,
           });
           setTimeout(async () => {
             await member.kick();
