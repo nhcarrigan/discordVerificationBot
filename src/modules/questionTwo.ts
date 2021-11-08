@@ -1,10 +1,10 @@
 import {
-  ButtonInteraction,
   CommandInteraction,
   GuildMember,
   Message,
   MessageActionRow,
   MessageSelectMenu,
+  SelectMenuInteraction,
 } from "discord.js";
 
 import { logHandler } from "../utils/logHandler";
@@ -18,7 +18,7 @@ import { questionThree } from "./questionThree";
  * @param {CommandInteraction} interaction The command interaction.
  */
 export const questionTwo = async (
-  interaction: ButtonInteraction
+  interaction: SelectMenuInteraction
 ): Promise<void> => {
   try {
     if (!interaction.member) {
@@ -50,7 +50,7 @@ export const questionTwo = async (
     const component = new MessageActionRow().addComponents([question]);
 
     const first = (await interaction.editReply({
-      content: "Please complete this form to gain access to the server.",
+      content: "Please complete this second question.",
       components: [component],
     })) as Message;
 
@@ -62,20 +62,20 @@ export const questionTwo = async (
 
     collector.on("collect", async (collected) => {
       if (collected.isSelectMenu()) {
+        await collected.deferReply({ ephemeral: true });
         if (collected.values[0] === "coc") {
-          await collected.reply({
-            content: "Correct! Please check the form for the next question.",
-            ephemeral: true,
+          await interaction.editReply({
+            content: "Correct! Here comes the final question.",
+            components: [],
           });
-          await questionThree(interaction);
+          await questionThree(collected);
         } else {
           await interaction.editReply({
             content: "You failed to select the correct answer.",
             components: [],
           });
-          await collected.reply({
+          await collected.editReply({
             content: "You will now be kicked.",
-            ephemeral: true,
           });
           setTimeout(async () => {
             await member.kick();
