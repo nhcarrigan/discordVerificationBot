@@ -80,7 +80,7 @@ export const questionOne = async (
           setTimeout(async () => {
             await member.kick();
             await sendLogMessage(
-              `<@!${interaction.user.id}> (${interaction.user.tag}) was kicked for answering the first question incorrectly: ${collected.values[0]}`
+              `🛑 <@!${interaction.user.id}> (${interaction.user.tag}) was kicked for answering the first question incorrectly: ${collected.values[0]}`
             );
           }, 5000);
         }
