@@ -92,7 +92,7 @@ export const questionThree = async (
           setTimeout(async () => {
             await member.kick();
             await sendLogMessage(
-              `${interaction.user.tag} was kicked for answering the third question incorrectly: ${collected.values[0]}`
+              `<@!${interaction.user.id}> (${interaction.user.tag}) was kicked for answering the third question incorrectly: ${collected.values[0]}`
             );
           }, 5000);
         }
