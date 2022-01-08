@@ -12,7 +12,7 @@ import { sendLogMessage } from "../utils/sendLogMessage";
 export const guildMemberAdd = async (member: GuildMember): Promise<void> => {
   try {
     await sendLogMessage(
-      `<@!${member.user.id}> (${member.user.tag}) has joined. Will kick in 5 minutes if they do not verify.`
+      `⚠️ <@!${member.user.id}> (${member.user.tag}) has joined. Will kick in 5 minutes if they do not verify.`
     );
     setTimeout(async () => {
       const updated = await member.fetch();
@@ -23,7 +23,7 @@ export const guildMemberAdd = async (member: GuildMember): Promise<void> => {
       ) {
         await updated.kick();
         await sendLogMessage(
-          `<@!${member.user.id}> (${member.user.tag}) was kicked because they did not verify within 5 minutes.`
+          `🛑 <@!${member.user.id}> (${member.user.tag}) was kicked because they did not verify within 5 minutes.`
         );
       }
     }, 300000);

@@ -24,7 +24,7 @@ export const verifyUser = async (
     }
     await user.roles.add(verifyRole);
     await sendLogMessage(
-      `<@!${user.user.id}> (${user.user.tag}) was verified!`
+      `✅ <@!${user.user.id}> (${user.user.tag}) was verified!`
     );
   } catch (e) {
     const err = e as Error;
