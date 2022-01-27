@@ -31,7 +31,7 @@ export const questionOne = async (
       .addOptions([
         {
           label: "nhcarrigan",
-          description: "Nicholas Carrigan is the owner of the server.",
+          description: "Naomi Carrigan is the owner of the server.",
           value: "nhcarrigan",
         },
         {
