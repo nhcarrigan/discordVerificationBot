@@ -8,7 +8,7 @@ import {
   SelectMenuInteraction,
 } from "discord.js";
 
-import { logHandler } from "../utils/logHandler";
+import { errorHandler } from "../utils/errorHandler";
 import { sendLogMessage } from "../utils/sendLogMessage";
 
 import { verifyUser } from "./verifyUser";
@@ -99,7 +99,6 @@ export const questionThree = async (
       }
     });
   } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
+    await errorHandler("questionThree", e);
   }
 };

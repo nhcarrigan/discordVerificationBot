@@ -1,6 +1,6 @@
 import { WebhookClient } from "discord.js";
 
-import { logHandler } from "./logHandler";
+import { errorHandler } from "./errorHandler";
 
 /**
  * Sends a message to the logging webhook. Use this for tracking
@@ -14,7 +14,6 @@ export const sendLogMessage = async (message: string): Promise<void> => {
 
     await hook.send({ content: message });
   } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
+    await errorHandler("sendLogMessage", e);
   }
 };

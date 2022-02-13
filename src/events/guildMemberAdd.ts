@@ -1,6 +1,6 @@
 import { GuildMember } from "discord.js";
 
-import { logHandler } from "../utils/logHandler";
+import { errorHandler } from "../utils/errorHandler";
 import { sendLogMessage } from "../utils/sendLogMessage";
 
 /**
@@ -28,7 +28,6 @@ export const guildMemberAdd = async (member: GuildMember): Promise<void> => {
       }
     }, 300000);
   } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
+    await errorHandler("guildMemberAdd", e);
   }
 };
