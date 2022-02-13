@@ -1,3 +1,4 @@
+import { errorHandler } from "../utils/errorHandler";
 import { logHandler } from "../utils/logHandler";
 import { sendLogMessage } from "../utils/sendLogMessage";
 
@@ -12,7 +13,6 @@ export const ready = async (): Promise<void> => {
       `Bot has loaded! Version ${process.env.npm_package_version}`
     );
   } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
+    await errorHandler("ready", e);
   }
 };

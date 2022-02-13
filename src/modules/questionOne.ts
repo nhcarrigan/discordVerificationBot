@@ -6,7 +6,7 @@ import {
   MessageSelectMenu,
 } from "discord.js";
 
-import { logHandler } from "../utils/logHandler";
+import { errorHandler } from "../utils/errorHandler";
 import { sendLogMessage } from "../utils/sendLogMessage";
 
 import { questionTwo } from "./questionTwo";
@@ -87,7 +87,6 @@ export const questionOne = async (
       }
     });
   } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
+    await errorHandler("questionOne", e);
   }
 };

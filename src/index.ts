@@ -1,10 +1,22 @@
+import { RewriteFrames } from "@sentry/integrations";
+import * as Sentry from "@sentry/node";
 import { Client } from "discord.js";
 
 import { guildMemberAdd } from "./events/guildMemberAdd";
 import { interactionCreate } from "./events/interactionCreate";
 import { onMessage } from "./events/message";
 import { ready } from "./events/ready";
-import { logHandler } from "./utils/logHandler";
+import { errorHandler } from "./utils/errorHandler";
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  tracesSampleRate: 1.0,
+  integrations: [
+    new RewriteFrames({
+      root: global.__dirname,
+    }),
+  ],
+});
 
 (async () => {
   try {
@@ -25,7 +37,6 @@ import { logHandler } from "./utils/logHandler";
 
     bot.on("messageCreate", async (message) => await onMessage(message));
   } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
+    await errorHandler("index", e);
   }
 })();

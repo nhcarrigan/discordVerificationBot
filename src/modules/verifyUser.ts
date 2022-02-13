@@ -1,6 +1,6 @@
 import { Guild, GuildMember } from "discord.js";
 
-import { logHandler } from "../utils/logHandler";
+import { errorHandler } from "../utils/errorHandler";
 import { sendLogMessage } from "../utils/sendLogMessage";
 
 /**
@@ -19,7 +19,7 @@ export const verifyUser = async (
     );
 
     if (!verifyRole) {
-      logHandler.log("error", "Could not locate verified role!");
+      await sendLogMessage("Could not locate verified role!");
       return;
     }
     await user.roles.add(verifyRole);
@@ -27,7 +27,6 @@ export const verifyUser = async (
       `✅ <@!${user.user.id}> (${user.user.tag}) was verified!`
     );
   } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
+    await errorHandler("verifyUser", e);
   }
 };

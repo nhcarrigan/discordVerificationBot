@@ -1,7 +1,7 @@
 import { Interaction } from "discord.js";
 
 import { questionOne } from "../modules/questionOne";
-import { logHandler } from "../utils/logHandler";
+import { errorHandler } from "../utils/errorHandler";
 
 /**
  * Handles the interactionCreate event.
@@ -20,7 +20,6 @@ export const interactionCreate = async (
       }
     }
   } catch (e) {
-    const err = e as Error;
-    logHandler.log("error", `${err.message}\n${err.stack}`);
+    await errorHandler("interactionCreate", e);
   }
 };
