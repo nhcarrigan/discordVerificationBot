@@ -9,6 +9,7 @@ import {
 
 import { Verification } from "../database/models/Verification";
 import { errorHandler } from "../utils/errorHandler";
+import { sendLogMessage } from "../utils/sendLogMessage";
 
 import { randomiseAnswers } from "./randomiseAnswers";
 import { verifyUser } from "./verifyUser";
@@ -24,7 +25,7 @@ export const askQuestion = async (
   config: Verification
 ): Promise<void> => {
   try {
-    if (!interaction.member) {
+    if (!interaction.member || !interaction.guild) {
       await interaction.editReply("Oh no!");
       return;
     }
@@ -71,6 +72,13 @@ export const askQuestion = async (
           await collected.editReply({
             content: "You will now be kicked.",
           });
+          if (config.logChannel) {
+            await sendLogMessage(
+              interaction.guild as Guild,
+              config.logChannel,
+              `🛑 <@${member.id}> (${member.user.tag}) was kicked for answering the question incorrectly.`
+            );
+          }
           setTimeout(async () => {
             await member.kick();
           }, 5000);

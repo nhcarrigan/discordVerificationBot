@@ -7,6 +7,7 @@ const VerificationSchema = new Schema({
   answerTwo: String,
   answerThree: String,
   verificationRole: String,
+  logChannel: String,
 });
 
 export interface Verification extends Document {
@@ -16,6 +17,7 @@ export interface Verification extends Document {
   answerTwo: string;
   answerThree: string;
   verificationRole: string;
+  logChannel: string;
 }
 
 export default model<Verification>("Verification", VerificationSchema);

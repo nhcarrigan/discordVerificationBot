@@ -41,6 +41,13 @@ export const start: Command = {
         .setName("verification-role")
         .setDescription("What role should be given to the user when verified?")
         .setRequired(true)
+    )
+    .addChannelOption((option) =>
+      option
+        .setName("log-channel")
+        .setDescription(
+          "What channel would you like verification logs to go to?"
+        )
     ),
   run: async (interaction) => {
     try {
@@ -72,6 +79,7 @@ export const start: Command = {
         "verification-role",
         true
       );
+      const logChannel = interaction.options.getChannel("log-channel");
 
       const serverConfig =
         (await getServerConfig(guild.id)) ||
@@ -82,6 +90,7 @@ export const start: Command = {
           answerTwo: "",
           answerThree: "",
           verificationRole: "",
+          logChannel: "",
         }));
 
       serverConfig.question = question;
@@ -89,6 +98,7 @@ export const start: Command = {
       serverConfig.answerTwo = answerTwo;
       serverConfig.answerThree = answerThree;
       serverConfig.verificationRole = verificationRole.id;
+      serverConfig.logChannel = logChannel?.id || "";
       await serverConfig.save();
 
       const embed = new MessageEmbed();
