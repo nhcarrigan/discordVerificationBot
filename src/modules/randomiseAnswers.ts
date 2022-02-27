@@ -26,6 +26,6 @@ export const randomiseAnswers = (
     },
   ];
 
-  const randomisedAnswers = answers.sort(() => Math.random() - 0.5);
+  const randomisedAnswers = [...answers].sort(() => Math.random() - 0.5);
   return randomisedAnswers.map((el, i) => ({ label: String(i + 1), ...el }));
 };

@@ -30,6 +30,6 @@ export const registerCommands = async () => {
       });
     }
   } catch (err) {
-    errorHandler("registerCommands", err);
+    await errorHandler("registerCommands", err);
   }
 };
