@@ -33,7 +33,7 @@ export const askQuestion = async (
     const member = interaction.member as GuildMember;
     const question = new MessageSelectMenu()
       .setCustomId("server-owner")
-      .setPlaceholder("Who is the owner of the server?")
+      .setPlaceholder(config.question)
       .addOptions(randomChoices);
 
     const component = new MessageActionRow().addComponents([question]);
