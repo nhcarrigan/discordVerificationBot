@@ -1,6 +1,6 @@
 import { RewriteFrames } from "@sentry/integrations";
 import * as Sentry from "@sentry/node";
-import { Client } from "discord.js";
+import { Client, WebhookClient } from "discord.js";
 
 import { connectDatabase } from "./database/connectDatabase";
 import { guildMemberAdd } from "./events/guildMemberAdd";
@@ -22,7 +22,7 @@ Sentry.init({
 (async () => {
   try {
     const bot = new Client({
-      intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES"],
+      intents: ["GUILDS", "GUILD_MEMBERS"],
     });
 
     await connectDatabase();
@@ -33,6 +33,20 @@ Sentry.init({
     bot.on("ready", async () => await ready());
 
     bot.on("guildMemberAdd", async (member) => await guildMemberAdd(member));
+
+    bot.on("guildCreate", async (guild) => {
+      const hook = new WebhookClient({ url: process.env.DEBUG_HOOK as string });
+      await hook.send(
+        `Verification bot has joined a new guild: ${guild.name} - ${guild.id}`
+      );
+    });
+
+    bot.on("guildDelete", async (guild) => {
+      const hook = new WebhookClient({ url: process.env.DEBUG_HOOK as string });
+      await hook.send(
+        `Verification bot has left a guild: ${guild.name} - ${guild.id}`
+      );
+    });
 
     bot.on(
       "interactionCreate",
