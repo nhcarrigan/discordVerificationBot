@@ -1,6 +1,6 @@
-# Project Name
+# Discord Verification Bot
 
-Project Description
+A verification bot to help prevent server raids and spam.
 
 ## Live Version
 
@@ -32,4 +32,4 @@ The full license terms may be viewed in the [LICENSE.md file](./LICENSE.md)
 
 ## Contact
 
-We may be contacted through our [Chat Server](http://chat.nhcarrigan.com) or via [email form](https://contact.nhcarrigan.com).
+We may be contacted through our [Chat Server](http://chat.nhcarrigan.com) or via `contact@nhcarrigan.com`.
