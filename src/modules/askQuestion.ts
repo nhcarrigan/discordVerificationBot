@@ -54,9 +54,10 @@ export const askQuestion = async (
         await collected.deferReply({ ephemeral: true });
         if (collected.values[0] === "one") {
           await interaction.editReply({
-            content: "Correct! Here comes the next question.",
+            content: "Correct!",
             components: [],
           });
+          await collected.editReply("You will be verified momentarily.");
           await verifyUser(
             collected.member as GuildMember,
             collected.guild as Guild,
