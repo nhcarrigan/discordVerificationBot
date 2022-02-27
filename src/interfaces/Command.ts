@@ -1,11 +1,8 @@
-import {
-  SlashCommandBuilder,
-  SlashCommandSubcommandsOnlyBuilder,
-} from "@discordjs/builders";
+import { SlashCommandBuilder } from "@discordjs/builders";
 import { CommandInteraction } from "discord.js";
 
-export interface CommandInt {
-  data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder;
+export interface Command {
+  data: Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">;
   /**
    * Handles the logic of the command.
    *

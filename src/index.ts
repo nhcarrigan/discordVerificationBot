@@ -2,11 +2,12 @@ import { RewriteFrames } from "@sentry/integrations";
 import * as Sentry from "@sentry/node";
 import { Client } from "discord.js";
 
+import { connectDatabase } from "./database/connectDatabase";
 import { guildMemberAdd } from "./events/guildMemberAdd";
 import { interactionCreate } from "./events/interactionCreate";
-import { onMessage } from "./events/message";
 import { ready } from "./events/ready";
 import { errorHandler } from "./utils/errorHandler";
+import { registerCommands } from "./utils/registerCommands";
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN,
@@ -24,6 +25,9 @@ Sentry.init({
       intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES"],
     });
 
+    await connectDatabase();
+    await registerCommands();
+
     await bot.login(process.env.TOKEN || "oh no");
 
     bot.on("ready", async () => await ready());
@@ -34,8 +38,6 @@ Sentry.init({
       "interactionCreate",
       async (interaction) => await interactionCreate(interaction)
     );
-
-    bot.on("messageCreate", async (message) => await onMessage(message));
   } catch (e) {
     await errorHandler("index", e);
   }
