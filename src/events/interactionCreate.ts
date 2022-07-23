@@ -14,7 +14,7 @@ export const interactionCreate = async (
   interaction: Interaction
 ): Promise<void> => {
   try {
-    if (interaction.isCommand()) {
+    if (interaction.isChatInputCommand()) {
       const target = CommandList.find(
         (command) => command.data.name === interaction.commandName
       );

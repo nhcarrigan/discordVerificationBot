@@ -1,10 +1,10 @@
 import {
+  ActionRowBuilder,
   ButtonInteraction,
   Guild,
   GuildMember,
   Message,
-  MessageActionRow,
-  MessageSelectMenu,
+  SelectMenuBuilder,
 } from "discord.js";
 
 import { Verification } from "../database/models/Verification";
@@ -31,12 +31,14 @@ export const askQuestion = async (
     }
     const randomChoices = randomiseAnswers(config);
     const member = interaction.member as GuildMember;
-    const question = new MessageSelectMenu()
+    const question = new SelectMenuBuilder()
       .setCustomId("server-owner")
       .setPlaceholder(config.question)
       .addOptions(randomChoices);
 
-    const component = new MessageActionRow().addComponents([question]);
+    const component = new ActionRowBuilder<SelectMenuBuilder>().addComponents([
+      question,
+    ]);
 
     const first = (await interaction.editReply({
       content:

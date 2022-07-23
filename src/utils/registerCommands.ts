@@ -1,5 +1,5 @@
 import { REST } from "@discordjs/rest";
-import { Routes } from "discord-api-types/v9";
+import { Routes } from "discord-api-types/v10";
 
 import { CommandList } from "../commands/CommandList";
 
@@ -14,7 +14,7 @@ export const registerCommands = async () => {
   try {
     const botId = process.env.BOT_ID as string;
     const homeGuild = process.env.HOME_GUILD as string;
-    const rest = new REST({ version: "9" }).setToken(
+    const rest = new REST({ version: "10" }).setToken(
       process.env.TOKEN as string
     );
 

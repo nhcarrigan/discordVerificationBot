@@ -1,12 +1,11 @@
 import { RewriteFrames } from "@sentry/integrations";
 import * as Sentry from "@sentry/node";
-import { Client, WebhookClient } from "discord.js";
+import { Client, GatewayIntentBits, WebhookClient } from "discord.js";
 
 import { connectDatabase } from "./database/connectDatabase";
 import { guildMemberAdd } from "./events/guildMemberAdd";
 import { interactionCreate } from "./events/interactionCreate";
 import { ready } from "./events/ready";
-import { startServer } from "./server/server";
 import { errorHandler } from "./utils/errorHandler";
 import { registerCommands } from "./utils/registerCommands";
 
@@ -23,12 +22,11 @@ Sentry.init({
 (async () => {
   try {
     const bot = new Client({
-      intents: ["GUILDS", "GUILD_MEMBERS"],
+      intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
     });
 
     await connectDatabase();
     await registerCommands();
-    await startServer();
 
     await bot.login(process.env.TOKEN || "oh no");
 
