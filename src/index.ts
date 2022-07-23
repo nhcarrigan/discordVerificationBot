@@ -6,7 +6,6 @@ import { connectDatabase } from "./database/connectDatabase";
 import { guildMemberAdd } from "./events/guildMemberAdd";
 import { interactionCreate } from "./events/interactionCreate";
 import { ready } from "./events/ready";
-import { startServer } from "./server/server";
 import { errorHandler } from "./utils/errorHandler";
 import { registerCommands } from "./utils/registerCommands";
 
@@ -28,7 +27,6 @@ Sentry.init({
 
     await connectDatabase();
     await registerCommands();
-    await startServer();
 
     await bot.login(process.env.TOKEN || "oh no");
 
