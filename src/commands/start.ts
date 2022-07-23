@@ -1,5 +1,11 @@
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+  PermissionFlagsBits,
+} from "discord.js";
 
 import VerificationModel from "../database/models/Verification";
 import { Command } from "../interfaces/Command";
@@ -63,7 +69,7 @@ export const start: Command = {
 
       if (
         typeof member.permissions === "string" ||
-        !member.permissions.has("MANAGE_GUILD")
+        !member.permissions.has(PermissionFlagsBits.ManageGuild)
       ) {
         await interaction.editReply(
           "You do not have permission to run this command."
@@ -101,18 +107,18 @@ export const start: Command = {
       serverConfig.logChannel = logChannel?.id || "";
       await serverConfig.save();
 
-      const embed = new MessageEmbed();
+      const embed = new EmbedBuilder();
       embed.setTitle(`Welcome to ${guild.name}!`);
       embed.setDescription(
         "In order to verify, you need to answer a question. Answering incorrectly will result in a kick. Failure to verify in 30 minutes will result in a kick.\n\nClick the button below to get started."
       );
 
-      const button = new MessageButton()
+      const button = new ButtonBuilder()
         .setLabel("Click here to verify!")
         .setEmoji("✅")
         .setCustomId("verify")
-        .setStyle("SUCCESS");
-      const row = new MessageActionRow().addComponents(button);
+        .setStyle(ButtonStyle.Success);
+      const row = new ActionRowBuilder<ButtonBuilder>().addComponents(button);
 
       await interaction.editReply({ embeds: [embed], components: [row] });
     } catch (err) {

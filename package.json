@@ -36,7 +36,6 @@
     "prettier": "2.7.1"
   },
   "dependencies": {
-    "@discordjs/builders": "^1.0.0",
     "@discordjs/rest": "^1.0.0",
     "@sentry/integrations": "^7.0.0",
     "@sentry/node": "^7.0.0",
