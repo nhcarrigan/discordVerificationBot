@@ -35,8 +35,8 @@
     "prettier": "2.8.5"
   },
   "dependencies": {
-    "@sentry/integrations": "7.43.0",
-    "@sentry/node": "7.43.0",
+    "@sentry/integrations": "7.44.0",
+    "@sentry/node": "7.44.0",
     "discord.js": "14.8.0",
     "dotenv": "16.0.3",
     "mongoose": "7.0.2",
