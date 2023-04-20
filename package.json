@@ -22,7 +22,7 @@
   "homepage": "https://github.com/nhcarrigan/discord-verificaton-bot#readme",
   "engines": {
     "node": "18.16.0",
-    "npm": "9.6.4"
+    "npm": "9.6.5"
   },
   "devDependencies": {
     "@nhcarrigan/eslint-config": "1.1.1",
