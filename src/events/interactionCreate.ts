@@ -24,20 +24,19 @@ export const interactionCreate = async (
       await target.run(interaction);
     }
     if (interaction.isButton()) {
-      switch (interaction.customId) {
-        case "verify":
-          await interaction.deferReply({ ephemeral: true });
-          if (!interaction.guild) {
-            await interaction.editReply("Cannot locate your guild record.");
-            return;
-          }
-          // eslint-disable-next-line no-case-declarations
-          const config = await getServerConfig(interaction.guild.id);
-          if (!config) {
-            await interaction.editReply("Cannot load question data.");
-            return;
-          }
-          await askQuestion(interaction, config);
+      const { customId } = interaction;
+      if (customId === "verify") {
+        await interaction.deferReply({ ephemeral: true });
+        if (!interaction.guild) {
+          await interaction.editReply("Cannot locate your guild record.");
+          return;
+        }
+        const config = await getServerConfig(interaction.guild.id);
+        if (!config) {
+          await interaction.editReply("Cannot load question data.");
+          return;
+        }
+        await askQuestion(interaction, config);
       }
     }
   } catch (e) {
