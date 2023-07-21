@@ -4,9 +4,7 @@ A verification bot to help prevent server raids and spam.
 
 ## Live Version
 
-This page is not yet deployed.
-
-<!--This page is currently deployed. [View the live website.]()-->
+This page is currently deployed. [View the live website.](https://docs.nhcarrigan.com/#/discord-verification-bot/index)
 
 ## Feedback and Bugs
 
