@@ -1,10 +1,10 @@
-import { SlashCommandBuilder } from "@discordjs/builders";
 import {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
   PermissionFlagsBits,
+  SlashCommandBuilder,
 } from "discord.js";
 
 import VerificationModel from "../database/models/Verification";
