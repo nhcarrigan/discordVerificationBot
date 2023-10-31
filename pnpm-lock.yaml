@@ -18,8 +18,8 @@ dependencies:
     specifier: 16.3.1
     version: 16.3.1
   mongoose:
-    specifier: 7.6.3
-    version: 7.6.3
+    specifier: 7.6.4
+    version: 7.6.4
   typescript:
     specifier: 5.2.2
     version: 5.2.2
@@ -1700,8 +1700,8 @@ packages:
       '@mongodb-js/saslprep': 1.1.0
     dev: false
 
-  /mongoose@7.6.3:
-    resolution: {integrity: sha512-moYP2qWCOdWRDeBxqB/zYwQmQnTBsF5DoolX5uPyI218BkiA1ujGY27P0NTd4oWIX+LLkZPw0LDzlc/7oh1plg==}
+  /mongoose@7.6.4:
+    resolution: {integrity: sha512-kadPkS/f5iZJrrMxxOvSoOAErXmdnb28lMvHmuYgmV1ZQTpRqpp132PIPHkJMbG4OC2H0eSXYw/fNzYTH+LUcw==}
     engines: {node: '>=14.20.1'}
     dependencies:
       bson: 5.5.0
