@@ -36,7 +36,7 @@
     "@sentry/node": "7.92.0",
     "discord.js": "14.14.1",
     "dotenv": "16.3.1",
-    "mongoose": "7.6.7",
+    "mongoose": "7.6.8",
     "typescript": "5.3.3",
     "winston": "3.11.0"
   }
