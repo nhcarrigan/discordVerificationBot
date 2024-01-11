@@ -31,5 +31,9 @@ export const errorHandler = async (context: string, err: unknown) => {
     },
   ]);
 
-  await hook.send({ embeds: [embed] });
+  await hook.send({
+    embeds: [embed],
+    avatarURL: "https://cdn.nhcarrigan.com/avatars/nhcarrigan.png",
+    username: "Verification Bot",
+  });
 };
