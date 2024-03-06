@@ -37,7 +37,7 @@
     "discord.js": "14.14.1",
     "dotenv": "16.4.5",
     "mongoose": "7.6.9",
-    "typescript": "5.3.3",
+    "typescript": "5.4.2",
     "winston": "3.12.0"
   }
 }
