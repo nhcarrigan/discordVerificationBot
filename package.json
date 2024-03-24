@@ -38,6 +38,6 @@
     "dotenv": "16.4.5",
     "mongoose": "7.6.10",
     "typescript": "5.4.3",
-    "winston": "3.12.0"
+    "winston": "3.13.0"
   }
 }
